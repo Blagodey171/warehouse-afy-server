@@ -56,7 +56,7 @@ async function processingUserData<T extends {
         } else if (handlerName === 'LOGOUT') {
             findUserInDatabase.isAuthorisation = false
             await findUserInDatabase.save()
-            return
+            return { message: 'Вы вышли из учетной записи'}
         } else if (handlerName === 'REGISTRATION') {
             if (findUserInDatabase) { 
                 throw {errorMessage: 'Данный пользователь существует'} 
