@@ -2,7 +2,7 @@
     "name": "warehouse-webpack",
     "version": "1.0.0",
     "description": "warehouse for AFY",
-    "main": "./index.js",
+    "main": "dist/server.node.js",
     "scripts": {
         "dev": "nodemon ./index.ts cross-env NODE_ENV=development",
         "build-server-tsc": "tsc ./index.ts",
@@ -12,7 +12,7 @@
         "pm2-dev:delete": "pm2 delete ./index.js",
         "pm2-prod": "pm2 start dist/server.node.js --exp-backoff-restart-delay=1000 --watch --wait-ready",
         "pm2-prod:delete": "pm2 delete dist/server.node.js",
-        "prod-test-start": "node dist/server.node.js"
+        "start": "node dist/server.node.js"
     },
     "repository": {
         "type": "git",
