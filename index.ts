@@ -29,7 +29,8 @@ app.use(express.static(path.join(__dirname, 'dist')))
 app.use(cookieParser())
 app.use(express.json())
 app.use(cors({
-    origin: true,
+    // origin: true,
+    origin: ['https://warehouse-afy-client.herokuapp.com'],
     credentials: true,
 }))
 
