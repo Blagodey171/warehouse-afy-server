@@ -1,0 +1,9 @@
+{
+    "ignore": [".gitignore", "node_modules/**/node_modules"],
+    "execMap": {
+        "ts": "ts-node",
+        "js": "node --harmony"
+    },
+    "watch": ["*"],
+    "ext": "js,json,ts"
+}
