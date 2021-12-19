@@ -28,9 +28,9 @@ const userHandler = () => {
         async logout (req, res, next) {
             optionsRequestHandler(req)
             try {
-                await processingUserData(req)
+                let userDataHandling = await processingUserData(req)
 
-                res.status(200)
+                res.status(200).json(userDataHandling)
             } catch (errorMessage) {
                 res.json(errorMessage)
             }
