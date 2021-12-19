@@ -1,6 +1,9 @@
 {
     "name": "warehouse-webpack",
     "version": "1.0.0",
+    "engines": {
+        "node": "16.x"
+      },
     "description": "warehouse for AFY",
     "main": "dist/server.node.js",
     "scripts": {
