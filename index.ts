@@ -47,8 +47,9 @@ app.use('/api/login',
         saveUninitialized: true,
         resave: false,
         cookie: {
+            samSite: 'none',
             httpOnly: true,
-            secure: false,
+            secure: true,
             maxAge: 5000000,
             path: '/'
         },
