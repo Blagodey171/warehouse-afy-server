@@ -29,8 +29,11 @@ app.use(express.static(path.join(__dirname, 'dist')))
 app.use(cookieParser())
 app.use(express.json())
 app.use(cors({
-    origin: '*',
+    origin: true,
     credentials: true,
+}))
+app.options('*', cors({
+    origin: true,
 }))
 
 
