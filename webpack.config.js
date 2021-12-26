@@ -15,6 +15,17 @@ const serverConfig = {
         path: path.resolve(__dirname, 'dist'),
         filename: './server.node.js',
     },
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        compress: true,
+        port: 3001,
+        watchContentBase: true,
+        progress: true,
+        open: true,
+        hot: true,
+        historyApiFallback: true,
+        
+    },
     module: {
         rules: [
             {
