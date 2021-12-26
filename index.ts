@@ -46,7 +46,7 @@ app.use('/api/login',
         cookie: {
             sameSite: 'none',
             httpOnly: true,
-            secure: true,
+            secure: false,
             maxAge: 5000000,
             path: '/'
         },
