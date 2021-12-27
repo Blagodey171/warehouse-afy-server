@@ -49,7 +49,7 @@ app.use('/api/login',
         cookie: {
             sameSite: 'none',
             httpOnly: true,
-            secure: false,
+            secure: true,
             maxAge: 5000000,
             path: '/'
         },
