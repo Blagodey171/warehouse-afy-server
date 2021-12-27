@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 
 const ConnectMongo = require('../../connectMongo')
-const { createJWTToken } = require('../createNewToken')
+const createJWTToken = require('../createNewToken')
 
 interface request {
     sessionID: string | boolean

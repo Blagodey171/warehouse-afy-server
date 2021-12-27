@@ -32,9 +32,9 @@ app.use(cors({
     origin: true,
     credentials: true,
 }))
-app.options('*', cors({
-    origin: true,
-}))
+// app.options('*', cors({
+//     origin: true,
+// }))
 
 
 app.use('/api/login',
@@ -47,9 +47,8 @@ app.use('/api/login',
         saveUninitialized: true,
         resave: false,
         cookie: {
-            samSite: 'none',
             httpOnly: true,
-            secure: true,
+            secure: false,
             maxAge: 5000000,
             path: '/'
         },
