@@ -26,14 +26,14 @@ export const upgradeJWTTokenInSession = async function <Y>(request: request, res
     const cookiesSessionWarehouse = request.sessionID
     let connectMongo = new ConnectMongo(process.env.DATABASE_NAME, process.env.COLLECTION_NAME_SESSIONS)
     let connectMongoDatabaseCollection = await connectMongo.connectDB()
-    let findResult: arrayResult[] = await connectMongoDatabaseCollection.find({ id: cookiesSessionWarehouse }).toArray()
+    let findResult = await connectMongoDatabaseCollection.findOne({ id: cookiesSessionWarehouse })
     let token = request.headers.authorization.split(' ')[1]
-    if (!findResult.length) { // ошибка если время сессии истекло
+    if (!findResult) { // ошибка если время сессии истекло
         return response.json({
             errorMessage: 'expired session',
         })
     }
-    const parse: parseSession = JSON.parse(findResult[0].session)
+    const parse: parseSession = JSON.parse(findResult.session)
     if (parse.token !== token) {
         await connectMongoDatabaseCollection.deleteOne({ id: cookiesSessionWarehouse })
         return response.json({

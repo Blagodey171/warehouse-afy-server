@@ -46,6 +46,10 @@ app.use('/api/login',
         secret: process.env.SECRET_KEY_SESSION,
         saveUninitialized: true,
         resave: false,
+        // local
+        // sameSite: none, secure: true - на локальной машине кука записывается если удалено поле sameSite,если поле есть то кука не записывается но обновляет токен в БД --- ПРОБЛЕМА В ПОИСКЕ СЕССИИ МЕТОДОМ find (правильно findOne)???
+        // heroku
+        // sameSite: none, secure: true - сначала работает кука не записана на клиенте,обновляется токен в БД,все работает как надо,потом ломается --- ПРОБЛЕМА В ПОИСКЕ СЕССИИ МЕТОДОМ find (правильно findOne)???
         cookie: {
             sameSite: 'none',
             httpOnly: true,
