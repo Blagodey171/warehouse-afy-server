@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose')
 
+
 const schemaTemplate = {
     login: {type: String, required: true, unique: true},
     password: {type: String, required: true},
@@ -8,5 +9,4 @@ const schemaTemplate = {
 const UserSchema = new Schema(schemaTemplate)
 
 
-const User = model('User', UserSchema);
-module.exports = User
+export const User = model('User', UserSchema);

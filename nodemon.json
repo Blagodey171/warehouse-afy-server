@@ -5,6 +5,6 @@
         "js": "node --harmony"
     },
     "exec": "ts-node",
-    "watch": ["*.ts"],
+    "watch": ["*.ts", "*.js"],
     "ext": "js,json,ts"
 }

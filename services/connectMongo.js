@@ -15,7 +15,7 @@ class connectMongo {
         return collection
     }
 
-    disconnectDB () {
+    async disconnectDB () {
         this.client.close()
     }
 }
