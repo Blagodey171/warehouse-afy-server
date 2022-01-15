@@ -50,12 +50,8 @@ async function processingUserData (req: IrequestData) {
             session.token = JWTToken // <= записать в сессию необходимые данные , (partial || pick)
             session.login = login
 
-            if(findUserInDatabase.isAuthorisation === false) {
                 findUserInDatabase.isAuthorisation = true
                 await findUserInDatabase.save()
-            } else {
-
-            }
             
             const responseLogin = {
                 token: JWTToken,
