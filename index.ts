@@ -50,9 +50,9 @@ app.use('/api',
         saveUninitialized: true,
         resave: false,
         cookie: {
-            sameSite: 'none',
+            sameSite: 'strict',
             httpOnly: true,
-            secure: true,
+            secure: false,
             maxAge: 50000,
             path: '/'
         },

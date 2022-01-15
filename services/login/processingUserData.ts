@@ -41,8 +41,8 @@ async function processingUserData (req: IrequestData) {
 // 1.если зашел под своим,а потом под другим
 // 2.с другого устройства под этим же логином
 
-            const userSession = await createConnectDB(process.env.DATABASE_NAME, process.env.COLLECTION_NAME_SESSIONS, '_id', sessionID)
-            const loginFromSession = JSON.parse(userSession.endData.session).login
+            // const userSession = await createConnectDB(process.env.DATABASE_NAME, process.env.COLLECTION_NAME_SESSIONS, '_id', sessionID)
+            // const loginFromSession = JSON.parse(userSession.endData.session).login
             // if (login !== loginFromSession) {
             //     // если логин из сессии не равен логину при регистрации, то необходимо создавать новую сессию для другого пользователя
             // }
@@ -50,14 +50,14 @@ async function processingUserData (req: IrequestData) {
             session.token = JWTToken // <= записать в сессию необходимые данные , (partial || pick)
             session.login = login
 
-                findUserInDatabase.isAuthorisation = true
-                await findUserInDatabase.save()
+            findUserInDatabase.isAuthorisation = true
+            await findUserInDatabase.save()
             
             const responseLogin = {
                 token: JWTToken,
                 login: findUserInDatabase.login,
                 findUserInDatabase,
-                loginFromSession
+                // loginFromSession
             }
            
             return responseLogin
