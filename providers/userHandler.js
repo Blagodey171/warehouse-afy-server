@@ -62,6 +62,7 @@ const userHandler = () => {
                 
                 res.json({
                     decodeUserData,
+                    sessionID: req.sessionID
                 })
             } catch (errorMessage) {
                 // сюда перейдем ТОЛЬКО если нет токена или протух

@@ -47,10 +47,11 @@ app.use('/api',
             stringify: true
         }),
         secret: process.env.SECRET_KEY_SESSION,
-        saveUninitialized: true,
+        saveUninitialized: false,
         resave: false,
+        rolling: true,
         cookie: {
-            sameSite: 'strict',
+            // sameSite: 'strict',
             httpOnly: true,
             secure: false,
             maxAge: 50000,
