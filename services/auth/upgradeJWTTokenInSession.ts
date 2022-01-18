@@ -1,5 +1,5 @@
 const ConnectMongo = require('../connectMongo')
-const createJWTTokenSecond = require('../createNewToken')
+const createJWTToken = require('../createNewToken')
 
 interface req {
     session: {
@@ -45,7 +45,7 @@ const upgradeJWTTokenInSession = async function <Y>(request: req, response: resp
             errorMessage: 'Необходимо зайти под своим логином и паролем',
         }) // если в сессии токен не равен токену в теле запроса - значит юзер не логинился, но сессия его все равно создается.следовательно токен не обновляем и удаляем сессию
     }
-    const newJWTToken: string = createJWTTokenSecond(parse.user, process.env.TOKEN_EXPIRES_IN)
+    const newJWTToken: string = createJWTToken(parse.user, process.env.TOKEN_EXPIRES_IN)
     parse.token = newJWTToken
 
     const newSessionObject = JSON.stringify(parse)

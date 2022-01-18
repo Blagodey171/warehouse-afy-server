@@ -57,7 +57,7 @@ async function processingUserData (req: IrequestData) {
                 token: JWTToken,
                 login: findUserInDatabase.login,
                 findUserInDatabase,
-                // loginFromSession
+                sessionID
             }
            
             return responseLogin
