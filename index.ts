@@ -52,6 +52,7 @@ app.use('/api',
         rolling: true,
         cookie: {
             // sameSite: 'strict',
+            domain: 'http://localhost:3000',
             httpOnly: true,
             secure: false,
             maxAge: 50000,
