@@ -40,27 +40,27 @@ app.use(cors({
         // heroku
         // sameSite: none, secure: true - сначала работает кука не записана на клиенте,обновляется токен в БД,все работает как надо,потом ломается --- ПРОБЛЕМА В ПОИСКЕ СЕССИИ МЕТОДОМ find (правильно findOne)???
 
-app.use('/api',
-    session({
-        store: MongoStore.create({
-            mongoUrl: process.env.MOBGODB_URL,
-            stringify: true
-        }),
-        secret: process.env.SECRET_KEY_SESSION,
-        saveUninitialized: false,
-        resave: false,
-        rolling: true,
-        cookie: {
-            // sameSite: 'strict',
-            domain: 'http://localhost:3000',
-            httpOnly: true,
-            secure: false,
-            maxAge: 50000,
-            path: '/'
-        },
-        name: 'sessionWarehouse'
-    })
-)
+// app.use('/api',
+//     session({
+//         store: MongoStore.create({
+//             mongoUrl: process.env.MOBGODB_URL,
+//             stringify: true
+//         }),
+//         secret: process.env.SECRET_KEY_SESSION,
+//         saveUninitialized: false,
+//         resave: false,
+//         rolling: true,
+//         cookie: {
+//             // sameSite: 'strict',
+//             // domain: '.herokuapp.com',
+//             httpOnly: true,
+//             secure: false,
+//             maxAge: 50000,
+//             path: '/'
+//         },
+//         name: 'sessionWarehouse'
+//     })
+// )
 app.use('/api', userRouter)
 
 app.get('/', (req: any, res: { send: (arg0: string) => void }) => {

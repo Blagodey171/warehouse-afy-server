@@ -1,10 +1,9 @@
+import {verifyJWTToken} from '../services/createNewToken'
 const ConnectMongo = require('../services/connectMongo.js')
-const jwt = require('jsonwebtoken')
-
 const entryDataValidation = require('../services/entryDataValidation.js')
 const processingUserData = require('../services/login/processingUserData.ts')
 const upgradeJWTTokenInSession = require('../services/auth/upgradeJWTTokenInSession.ts')
-
+const jwt = require('jsonwebtoken')
 
 const optionsRequestHandler = (req) => {
     if (req.method === 'OPTIONS') {
@@ -54,7 +53,9 @@ const userHandler = () => {
             }
             try {
                 if (!req.headers.authorization) {
-                    throw {errorMessage: 'К сожалению Вы не прошли авторизацию'} // СДЕЛАТЬ ОТОБРАЖЕНИЕ ОШИБКИ НА КЛИЕНТЕ
+                    throw {
+                        errorMessage: 'К сожалению Вы не прошли авторизацию' // СДЕЛАТЬ ОТОБРАЖЕНИЕ ОШИБКИ НА КЛИЕНТЕ,
+                    }
                 }
                 
                 let token = req.headers.authorization.split(' ')[1]
@@ -62,15 +63,12 @@ const userHandler = () => {
                 
                 res.json({
                     decodeUserData,
-                    sessionID: req.sessionID
                 })
             } catch (errorMessage) {
-                // сюда перейдем ТОЛЬКО если нет токена или протух
-                // req.sessionID берется из тела запроса, sessionID берется тот который создался и записался при последнем логине 
-                
-                // req.sessionID = false // обнулить айди сессии, потому что при единственном логине сразу создается сессия в БД и в теле request будет сохранен sessionID. Если даже в локалсторадж сделать любое поле 'token'
-                const upgradeSession = upgradeJWTTokenInSession(req, res, errorMessage)
-                return upgradeSession
+                let createNewToken = await upgradeJWTTokenInSession(req)
+                res.json(
+                    createNewToken
+                )
 
             }
         }

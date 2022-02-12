@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb')
 
-class connectMongo {
+export class connectMongo {
     client = new MongoClient('mongodb+srv://perelad797:Pereladdenis8980@warehouse-cluster.iya4c.mongodb.net')
 
     constructor(dbName, collectionName) {
@@ -19,4 +19,3 @@ class connectMongo {
         this.client.close()
     }
 }
-module.exports = connectMongo
