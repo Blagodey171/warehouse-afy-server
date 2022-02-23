@@ -1,9 +1,10 @@
 import {verifyJWTToken} from '../services/createNewToken'
 const ConnectMongo = require('../services/connectMongo.js')
+const jwt = require('jsonwebtoken')
+const authentication = require('../services/authentication/authentication')
 const entryDataValidation = require('../services/entryDataValidation.js')
 const processingUserData = require('../services/login/processingUserData.ts')
-const upgradeJWTTokenInSession = require('../services/auth/upgradeJWTTokenInSession.ts')
-const jwt = require('jsonwebtoken')
+const upgradeJWTTokenInSession = require('../services/authorization/upgradeJWTTokenInSession.ts')
 
 const optionsRequestHandler = (req) => {
     if (req.method === 'OPTIONS') {
@@ -16,7 +17,7 @@ const userHandler = () => {
             optionsRequestHandler(req)
             try {
                 entryDataValidation(req)
-                let userDataHandling = await processingUserData(req)
+                let userDataHandling = await authentication(req)
 
                 res.status(200).json(userDataHandling)
             } catch (errorMessage) {

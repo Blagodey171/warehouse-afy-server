@@ -1,5 +1,5 @@
 import {connectMongo} from '../connectMongo'
-import {User} from '../../schema/UserModel'
+const User = require('../../schema/UserModel')
 import {Iuser} from '../../schema/interfaceForUserModel'
 const jwt = require('jsonwebtoken')
 interface request {
@@ -29,9 +29,9 @@ async function upgradeJWTTokenInSession <Y>(request: request) {
 
     let verifyResponse = jwt.verify(findUserInDatabase.refreshToken, process.env.JWT_SECRET_TOKEN, async function (err:any, decodedData:any) {
         if (err) {
-            findUserInDatabase.devices.isAuthorisation = false
-            findUserInDatabase.accessToken = ''
-            findUserInDatabase.refreshToken = ''
+            // findUserInDatabase.devices.isAuthorisation = false
+            // findUserInDatabase.accessToken = ''
+            // findUserInDatabase.refreshToken = ''
             await findUserInDatabase.save()
             let errorResponse = {
                 errorName: err.name,
