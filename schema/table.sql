@@ -6,7 +6,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE devices (
-    deviceId smallserial,
+    DeviceId smallserial,
     AccessToken  varchar,
     RefreshToken varchar,
     DateCreate date,

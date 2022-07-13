@@ -3,8 +3,7 @@ const authentication = require('../services/authentication/authentication')
 const registration = require('../services/registration/registration')
 const logout = require('../services/logout/logout')
 const entryDataValidation = require('../services/entryDataValidation.js')
-const upgradeJWTTokenInSession = require('../services/authorization/upgradeJWTTokenInSession.ts')
-
+const authorization = require('../services/authorization/authorization')
 
 const optionsRequestHandler = (req) => {
     if (req.method === 'OPTIONS') {
@@ -52,21 +51,12 @@ const userHandler = () => {
         async authorization (req, res, next) {
             optionsRequestHandler(req)
             try {
-                if (!req.headers.authorization) {
-                    throw {
-                        errorMessage: 'К сожалению Вы не прошли авторизацию' // СДЕЛАТЬ ОТОБРАЖЕНИЕ ОШИБКИ НА КЛИЕНТЕ,
-                    }
-                }
-                let token = req.headers.authorization.split(' ')[1]
-                const decodeUserData = jwt.verify(token, process.env.JWT_SECRET_TOKEN)
+                const userDataHandling = await authorization(req)
                 
-                res.json({
-                    decodeUserData,
-                })
+                res.json(userDataHandling)
             } catch (errorMessage) {
-                let createNewToken = await upgradeJWTTokenInSession(req)
                 res.json(
-                    createNewToken
+                    errorMessage
                 )
 
             }

@@ -1,17 +1,7 @@
-import {connectMongo} from '../connectMongo'
-const mongoose = require('mongoose')
 const User = require('../../schema/UserModel')
-import {Iuser} from '../../schema/interfaceForUserModel'
 const jwt = require('jsonwebtoken')
-interface request {
-    body: {
-        login: string,
-        deviceId: string
-    },
-    headers: {
-        authorization: string
-    }
-}
+const pool = require('../../pool/pool')
+
 interface response {
     json<T>(data: T): void
 }
@@ -25,10 +15,12 @@ interface parseSession {
     // возможно нужно сделать единый enum и тут по нему создавать интерфейс
 }
 
-async function upgradeJWTTokenInSession(request: request) {
-    // let deviceId = request.body.deviceId
-    // const login = request.body.login
-    // const findUserInDatabase: Iuser = await User.findOne({ login })
+async function upgradeJWTTokenInSession(login:string, deviceId: string) {
+    const client = await pool.connect()
+
+    let tokenDeviceForUpdate = await client.query(`SELECT RefreshToken FROM devices WHERE DeviceId = '${deviceId}'`)
+    let verifyTokenForUpdate = jwt.verify(tokenDeviceForUpdate.rows[0].refreshtoken, process.env.JWT_SECRET_TOKEN_REFRESH)
+
 
     // let verifyResponse = jwt.verify(findUserInDatabase.refreshToken, process.env.JWT_SECRET_TOKEN, async function (err:any, decodedData:any) {
     //     if (err) {
@@ -47,7 +39,7 @@ async function upgradeJWTTokenInSession(request: request) {
     //             errorMessage: err.message,
     //             messageForUser: 'Время сессии вышло,войдите снова'
     //         }
-    //         return errorResponse
+            return verifyTokenForUpdate
     //     }
     //     let newAccessToken = jwt.sign(login, process.env.ACCESS_TOKEN_EXPIRES_IN)
     //     findUserInDatabase.accessToken = newAccessToken

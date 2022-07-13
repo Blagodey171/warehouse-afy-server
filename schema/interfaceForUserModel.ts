@@ -1,6 +1,7 @@
 export interface Iuser {
     body: {
         login: string,
-        password: string,
+        password?: string,
+        deviceId?: string
     },
 }
